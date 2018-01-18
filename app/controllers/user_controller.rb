@@ -1,3 +1,4 @@
+require 'pry'
 class UserController < ApplicationController
 
   get '/signup' do
@@ -31,8 +32,25 @@ class UserController < ApplicationController
     if @user && user.authenticate(password:params[:password])
       redirect '/activities'
     else
-      redirect '/error'
+      redirect '/login'
     end
   end
 
+  get '/users/:slug' do
+    if logged_in?
+      @user = User.find_by_slug(params[:slug])
+      erb :'users/show'
+    else
+      redirect '/login'
+    end
+  end
+
+  get '/logout' do
+    if logged_in?
+      session.clear
+      redirect '/login'
+    else
+      redirect '/error'
+    end
+  end
 end

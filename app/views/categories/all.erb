@@ -1,0 +1,8 @@
+<%@categories.all.each do |c|%>
+
+  <ul><%=c.name%></ul>
+    <%c.id.activities.each do |a|%>
+      <li><%=a.name%></li>
+    <%end%>
+
+<%end%>
