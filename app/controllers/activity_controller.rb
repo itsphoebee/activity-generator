@@ -23,7 +23,14 @@ class ActivityController < ApplicationController
   end
 
   post '/activities/new' do
-
+    if !!Activity.all.find_by(name:params[:name],address:params[:address])
+      redirect '/error'
+    else
+      raise params
+      @activity = Activity.create(params)
+      @activity.user_id = session[:id]
+      redirect "/activities/#{@activity.slug}"
+    end
   end
 
   get '/activities/:slug' do

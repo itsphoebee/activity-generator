@@ -9,7 +9,10 @@
 
 Post your comment about <%=@activity.name%> below:
 
-<form action="/post">
+<form action="/activities/<%=@activity.slug%>/comments" method="post">
+  <label>Comment: </label>
+  <input type="text" id="content" name="content">
+  <input type="submit" value="Submit">
 </form>
 
 <form action="/activities/<%=@activity.slug%>/delete" method="post">
