@@ -1,3 +1,13 @@
 <h3><%=@activity.name%></h3>
-<p><%=@activity.description%></p>
-<p>Owned by <%=@activity.user.name%></p>
+<h4><%=@activity.description%></h4>
+<h4>Owned by <%=@activity.user.name%></h4>
+
+
+<%@activity.comments.each do |c|%>
+  <p><%=c.content%></p>
+<%end%>
+
+<form action="/activities/<%=@activity.slug%>/delete" method="post">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <input type="submit" value="Delete">
+</form>
