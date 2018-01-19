@@ -1,6 +1,8 @@
 require 'pry'
 class UserController < ApplicationController
 
+  use Rack::Flash
+
   get '/signup' do
     if logged_in?
       redirect '/activities'
@@ -15,7 +17,8 @@ class UserController < ApplicationController
       session[:user_id] = @user.id
       redirect '/activities'
     else
-      redirect '/error'
+      flash[:message]= "There was an error with your request. Please make sure to fill out all fields correctly."
+      redirect '/signup'
     end
   end
 
@@ -32,6 +35,7 @@ class UserController < ApplicationController
     if @user && user.authenticate(password:params[:password])
       redirect '/activities'
     else
+      flash[:message] = "There was an error with your request. Please make sure both fields are entered correctly."
       redirect '/login'
     end
   end
@@ -48,9 +52,10 @@ class UserController < ApplicationController
   get '/logout' do
     if logged_in?
       session.clear
-      redirect '/login'
+      redirect '/'
     else
-      redirect '/error'
+      flash[:message]="There was an error with your request."
+      redirect '/login'
     end
   end
 end
