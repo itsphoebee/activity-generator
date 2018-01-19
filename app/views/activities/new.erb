@@ -15,7 +15,7 @@
 
   <label>Category Type:</label>
   <%@categories.each do |c|%>
-    <input type="radio" name="category_id" id="category_id"><%=c.name%></input>
+    <input type="radio" name="category_id" id="category_<%=c.id%>"><%=c.name%></input>
   <%end%>
   <br></br>
 

@@ -1,5 +1,6 @@
 require './config/environment'
 require 'pry'
+
 class ActivityController < ApplicationController
 
   get '/activities' do
@@ -37,14 +38,13 @@ class ActivityController < ApplicationController
   post '/activities/:slug' do
 
   end
-  
+
   get '/activities/:slug/edit' do
     @activity = Activity.find_by_slug(params[:slug])
     if logged_in? && @activity.user_id == session[:user_id]
       erb :'activities/edit'
     else
-      flash[:message]="You do not have permission to access this."
-      redirect "/activities/#{params[:slug]}"
+      redirect '/error'
     end
   end
 
@@ -53,8 +53,7 @@ class ActivityController < ApplicationController
     if @activity.user_id == session[:user_id]
       @activity.delete
     else
-      flash[:message]="You do not have permission to access this."
-      redirect "/activities/#{params[:slug]}"
+      redirect '/error'
     end
   end
 end
