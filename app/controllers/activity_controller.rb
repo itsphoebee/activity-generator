@@ -11,4 +11,13 @@ class ActivityController < ApplicationController
       redirect '/login'
     end
   end
+
+  get '/activities/:slug' do
+    if logged_in?
+      @activity = Activity.find_by_slug(params[:slug])
+      erb :'activities/show'
+    else
+      redirect '/login'
+    end
+  end
 end

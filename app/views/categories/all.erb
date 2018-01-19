@@ -1,8 +1,9 @@
-<%@categories.all.each do |c|%>
+<%@categories.all.each_with_index do |c,i|%>
 
-  <ul><%=c.name%></ul>
-    <%c.id.activities.each do |a|%>
-      <li><%=a.name%></li>
+<ul>
+  <h2><%=i+1%>. <%=c.name%></h2>
+  <%c.activities.each do |a|%>
+    <li><a href="/activities/<%=@random_activity.slug%>"><%=a.name%></a></li>
     <%end%>
-
+</ul>
 <%end%>

@@ -5,10 +5,10 @@ class User < ActiveRecord::Base
   has_many :activities
 
   def slug
-    self.name.gsub(" ","-")
+    self.name.downcase.gsub(" ","-")
   end
 
   def self.find_by_slug(slugged_name)
-    self.all.each {|n| n.slug == slugged_name}
+    self.all.find{|n| n.slug == slugged_name}
   end
 end
