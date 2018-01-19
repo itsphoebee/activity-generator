@@ -32,7 +32,7 @@ class UserController < ApplicationController
 
   post '/login' do
     @user = User.find_by(email:params[:email])
-    if @user && user.authenticate(password:params[:password])
+    if @user && @user.authenticate(password:params[:password])
       redirect '/activities'
     else
       flash[:message] = "There was an error with your request. Please make sure both fields are entered correctly."

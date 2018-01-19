@@ -1,2 +1,7 @@
-<h3>Welcome!</h3>
-<p> Have you checked out <%=@activity.name%> before?
+<h3>Welcome, <%=@user.name.titleize%>!</h3>
+
+
+<p> Here's a suggestion for your next event: <a href="/activities/<%=@random_activity.slug%>"><%=@random_activity.name%></a>!</p>
+<p> But if that one doesn't interest you, check out all our other <a href="/activities">activities</a>!</p>
+
+<p><a href="/logout">Logout</a></p>
