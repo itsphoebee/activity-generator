@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   validates_presence_of :name, :email, :password
   validates_format_of :email,:with => /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
   has_many :activities
+  has_many :comments
 
   def slug
     self.name.downcase.gsub(" ","-")
