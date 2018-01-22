@@ -1,0 +1,8 @@
+<h3>Post a new comment about<%=@activity.name%></h3>
+
+<form action="/activities/<%=@activity.slug%>/comments" method="post">
+  <p><label>Comment: </label></p>
+  <textarea id="content" name="content" rows="10" cols="30"></textarea>
+  <br>
+  <input type="submit" value="Submit">
+</form>

@@ -1,0 +1,5 @@
+<h3>All <%=@activity.name%>'s comments</h3>
+
+<%@activity.comments[0..1].each do |c|%>
+  <p><%=c.user.name%> said <%=c.content%></p>
+<%end%>

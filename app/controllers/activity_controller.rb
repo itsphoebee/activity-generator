@@ -53,7 +53,7 @@ class ActivityController < ApplicationController
 
   post '/activities/:slug' do
     @activity = Activity.find_by_slug(params[:slug])
-    @activty.update(params)
+    @activity.update(name:params[:name],address:params[:address],description:params[:description],category_id:params[:category_id])
     @activity.save
     redirect "/activities/#{@activity.slug}"
   end
