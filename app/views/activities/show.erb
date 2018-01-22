@@ -1,5 +1,10 @@
-<h3><%=@activity.name%></h3>
-<h4>Owned by <%=@activity.user.name%></h4>
+<h3><%=@activity.name%>
+<form action="/activities/<%=@activity.slug%>/delete" method="post">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <input type="submit" value="Delete">
+</form>
+</h3>
+<h4>Recommended by <%=@activity.user.name%> | <a href="/activities/<%=@activity.slug%>/edit">Edit</a> this activity</h4>
 
 <p><%=@activity.description%></p>
 <p>Comments about <%=@activity.name%></p>
@@ -7,15 +12,11 @@
   <p><%=c.user.name%> said <%=c.content%></p>
 <%end%>
 
+
 Post your comment about <%=@activity.name%> below:
-
 <form action="/activities/<%=@activity.slug%>/comments" method="post">
-  <label>Comment: </label>
-  <input type="text" id="content" name="content">
+  <p><label>Comment: </label></p>
+  <textarea id="content" name="content" rows="10" cols="30"></textarea>
+  <br>
   <input type="submit" value="Submit">
-</form>
-
-<form action="/activities/<%=@activity.slug%>/delete" method="post">
-  <input id="hidden" type="hidden" name="_method" value="patch">
-  <input type="submit" value="Delete">
 </form>

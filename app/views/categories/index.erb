@@ -2,8 +2,9 @@
 <%@categories.all.each_with_index do |c,i|%>
 
   <h3><%=i+1%>. <%=c.name%></h3>
+  <ul>
   <%c.activities.each do |a|%>
-    <a href="/activities/<%=a.slug%>"><%=a.name%></a>
+    <li><a href="/activities/<%=a.slug%>"><%=a.name%></a></li>
     <%end%>
-
+</ul>
 <%end%>

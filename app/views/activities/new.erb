@@ -10,12 +10,12 @@
   <br></br>
 
   <label>Description:</label>
-  <input type="text" name="description" id="description"></input>
+  <textarea name="description" id="description" rows="10" cols="30"></textarea>
   <br></br>
 
   <label>Category Type:</label>
   <%@categories.each do |c|%>
-    <input type="radio" name="category_<%=c.id%>" id="category_<%=c.id%>"><%=c.name%></input>
+    <input type="radio" name="category_id" value="<%=c.id%>" id="category_id"><%=c.name%></input>
   <%end%>
   <br></br>
 

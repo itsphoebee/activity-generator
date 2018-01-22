@@ -1,4 +1,3 @@
-
 class CategoryController < ApplicationController
 
   get '/categories' do

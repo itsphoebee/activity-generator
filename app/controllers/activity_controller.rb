@@ -26,9 +26,9 @@ class ActivityController < ApplicationController
     if !!Activity.all.find_by(name:params[:name],address:params[:address])
       redirect '/error'
     else
-      raise params
-      @activity = Activity.create(params)
-      @activity.user_id = session[:id]
+      @activity = Activity.new(params)
+      @activity.user_id = session[:user_id]
+      @activity.save
       redirect "/activities/#{@activity.slug}"
     end
   end
@@ -42,10 +42,6 @@ class ActivityController < ApplicationController
     end
   end
 
-  post '/activities/:slug' do
-
-  end
-
   get '/activities/:slug/edit' do
     @activity = Activity.find_by_slug(params[:slug])
     if logged_in? && @activity.user_id == session[:user_id]
@@ -53,6 +49,13 @@ class ActivityController < ApplicationController
     else
       redirect '/error'
     end
+  end
+
+  post '/activities/:slug' do
+    @activity = Activity.find_by_slug(params[:slug])
+    @activty.update(params)
+    @activity.save
+    redirect "/activities/#{@activity.slug}"
   end
 
   patch '/activities/:slug/delete' do
