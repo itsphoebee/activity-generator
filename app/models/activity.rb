@@ -1,8 +1,7 @@
 class Activity < ActiveRecord::Base
   belongs_to :user
   belongs_to :category
-  has_many :activity_comments
-  has_many :comments, through: :activity_comments
+  has_many :comments
 
   def slug
     self.name.downcase.gsub(" ","-")
