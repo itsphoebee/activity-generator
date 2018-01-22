@@ -9,7 +9,7 @@
 <p><%=@activity.description%></p>
 <p>Comments about <%=@activity.name%></p>
 <%@activity.comments[0..1].each do |c|%>
-  <p><b><%=c.user.name%></b> said, "<%=c.content%>"</p>
+  <p>On <%=c.created_at.strftime("%B %d, %Y")%>, <b><%=c.user.name%></b> said, "<%=c.content%>"</p>
 <%end%>
 
 <p>Post a new comment <a href="/activities/<%=@activity.slug%>/comments/new">here</a>!</p>
