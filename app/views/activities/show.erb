@@ -7,9 +7,10 @@
 <h4>Recommended by <%=@activity.user.name%> | <a href="/activities/<%=@activity.slug%>/edit">Edit</a> this activity</h4>
 
 <p><%=@activity.description%></p>
-<p>Comments about <%=@activity.name%></p>
-<%@activity.comments[0..1].each do |c|%>
-  <p>On <%=c.created_at.strftime("%B %d, %Y")%>, <b><%=c.user.name%></b> said, "<%=c.content%>"</p>
+<h4>Comments about <%=@activity.name%></h4>
+<%@activity.comments.last(2).each do |c|%>
+  <p>On <%=c.created_at.strftime("%B %d, %Y")%>, <strong><%=c.user.name%></strong> said, "<em><%=c.content%></em>"</p>
 <%end%>
 
 <p>Post a new comment <a href="/activities/<%=@activity.slug%>/comments/new">here</a>!</p>
+<p>See all comments <a href="/activities/<%=@activity.slug%>/comments">here</a>!</p>

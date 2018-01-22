@@ -1,7 +1,7 @@
 <h3>All <%=@activity.name%>'s comments</h3>
 
-<%@activity.comments[0..1].each do |c|%>
-  <p>On <%=c.created_at.strftime("%B %d, %Y")%>, <b><%=c.user.name%></b> said, "<%=c.content%>"</p>
+<%@activity.comments.each do |c|%>
+  <p>On <%=c.created_at.strftime("%B %d, %Y")%>, <strong><%=c.user.name%></strong> said, "<em><%=c.content%></em>"</p>
 <%end%>
 
 <p><a href="/activities/<%=@activity.slug%>">Back</a> to <%=@activity.name%>'s page</p>
