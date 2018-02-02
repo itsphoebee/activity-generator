@@ -6,7 +6,7 @@ class ActivityController < ApplicationController
   get '/activities' do
     if logged_in?
       @user = current_user
-      @random_activity = Activity.all.sample
+      @random_activity = Activity.all.where('activities.user_id != ?', @user.id).sample
       erb :'activities/index'
     else
       redirect '/login'
@@ -35,7 +35,7 @@ class ActivityController < ApplicationController
 
   get '/activities/:slug' do
     if logged_in?
-      @activity = Activity.find_by_slug(params[:slug])
+      @activity = current_activity
       erb :'activities/show'
     else
       redirect '/login'
@@ -43,7 +43,7 @@ class ActivityController < ApplicationController
   end
 
   get '/activities/:slug/edit' do
-    @activity = Activity.find_by_slug(params[:slug])
+    @activity = current_activity
     if logged_in? && @activity.user_id == session[:user_id]
       erb :'activities/edit'
     else
@@ -52,18 +52,25 @@ class ActivityController < ApplicationController
   end
 
   post '/activities/:slug' do
-    @activity = Activity.find_by_slug(params[:slug])
+    @activity = current_activity
     @activity.update(name:params[:name],address:params[:address],description:params[:description],category_id:params[:category_id])
     @activity.save
     redirect "/activities/#{@activity.slug}"
   end
 
   patch '/activities/:slug/delete' do
-    @activity = Activity.find_by_slug(params[:slug])
+    @activity = current_activity
     if @activity.user_id == session[:user_id]
       @activity.delete
     else
       redirect '/error'
     end
   end
+
+  private
+
+  def current_activity
+    Activity.find_by_slug(params[:slug])
+  end
+
 end

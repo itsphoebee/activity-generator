@@ -4,5 +4,14 @@
 <p> Here's a suggestion for your next event: <a href="/activities/<%=@random_activity.slug%>"><%=@random_activity.name%></a>!</p>
 <p> But if that one doesn't interest you, check out all our other <a href="/categories">activities</a>!</p>
 
+<h4>Here are all the activities you've recommended!</h4>
+  <ul>
+  <% @user.activities.each do |a| %>
+  <li>
+    <a href="/activities/<%=a.slug%>"><%= a.name %></a>
+  </li>
+    <% end %>
+  </ul>
+
 <p> Click <a href="/activities/new">here</a> to create a new activity! </p>
 <p><a href="/logout">Logout</a></p>
