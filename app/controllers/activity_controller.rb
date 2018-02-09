@@ -23,14 +23,10 @@ class ActivityController < ApplicationController
   end
 
   post '/activities/new' do
-    if !!Activity.all.find_by(name:params[:name],address:params[:address])
-      redirect '/error'
-    else
-      @activity = Activity.new(params)
-      @activity.user_id = session[:user_id]
-      @activity.save
-      redirect "/activities/#{@activity.slug}"
-    end
+    @activity = Activity.new(params[:activity])
+    @activity.user_id = session[:user_id]
+    @activity.save
+    redirect "/activities/#{@activity.slug}"
   end
 
   get '/activities/:slug' do
@@ -53,9 +49,14 @@ class ActivityController < ApplicationController
 
   post '/activities/:slug' do
     @activity = current_activity
-    @activity.update(name:params[:name],address:params[:address],description:params[:description],category_id:params[:category_id])
-    @activity.save
-    redirect "/activities/#{@activity.slug}"
+    if @activity.user_id == session[:user_id]
+      @activity.update(params[:activity])
+      @activity.save
+      redirect "/activities/#{@activity.slug}"
+    else
+      redirect '/error'
+    end
+
   end
 
   patch '/activities/:slug/delete' do

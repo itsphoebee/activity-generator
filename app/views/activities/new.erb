@@ -2,20 +2,20 @@
 
 <form action="/activities/new" method="post">
   <label>Name:</label>
-  <input type="text" name="name" id="name"></input>
+  <input type="text" name="activity[name]" id="name"></input>
   <br></br>
 
   <label>Address:</label>
-  <input type="text" name="address" id="address"></input>
+  <input type="text" name="activity[address]" id="address"></input>
   <br></br>
 
   <label>Description:</label>
-  <textarea name="description" id="description" rows="10" cols="30"></textarea>
+  <textarea name="activity[description]" id="description" rows="10" cols="30"></textarea>
   <br></br>
 
   <label>Category Type:</label>
   <%@categories.each do |c|%>
-    <input type="radio" name="category_id" value="<%=c.id%>" id="category_id"><%=c.name%></input>
+    <input type="radio" name="activity[category_id]" value="<%=c.id%>" id="category_id"><%=c.name%></input>
   <%end%>
   <br></br>
 

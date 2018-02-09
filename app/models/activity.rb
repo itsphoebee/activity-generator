@@ -2,6 +2,8 @@ class Activity < ActiveRecord::Base
   belongs_to :user
   belongs_to :category
   has_many :comments
+  validates_uniqueness_of :name
+  validates_uniqueness_of :address
 
   def slug
     self.name.downcase.gsub(" ","-")
